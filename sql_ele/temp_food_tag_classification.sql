@@ -44,5 +44,5 @@ SELECT concat_ws('','%',key,'%'), priority, value
 FROM temp.temp_food_tag_classification_temp
 WHERE part='class4';
 
-LOAD DATA LOCAL inpath '/home/jiahao.dong/file_data/food_func_tag' OVERWRITE INTO TABLE  temp.temp_food_tag_classification_temp PARTITION (part='food_func');
-LOAD DATA LOCAL inpath '/home/jiahao.dong/file_data/food_scene_tag' OVERWRITE INTO TABLE  temp.temp_food_tag_classification_temp PARTITION (part='food_scene');
+LOAD DATA LOCAL inpath '/home/jiahao.dong/file_data/food_func_tag' OVERWRITE INTO TABLE  temp.temp_food_tag_classification PARTITION (part='food_func');
+LOAD DATA LOCAL inpath '/home/jiahao.dong/file_data/food_scene_tag' OVERWRITE INTO TABLE  temp.temp_food_tag_classification PARTITION (part='food_scene');

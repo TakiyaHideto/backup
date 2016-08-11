@@ -63,3 +63,7 @@ LATERAL VIEW EXPLODE(split(value,'#')) myTable AS single_tag
 ) t2
 ON t1.single_tag=t2.single_tag
 GROUP BY t2.key, t1.key;
+
+
+
+
