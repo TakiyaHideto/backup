@@ -89,24 +89,26 @@ create table temp.temp_restaurant_total_score_for_zf as
 select *, 
 case when t.total_score>21 then 'A' 
 when t.total_score>15 then 'B'
-when t.total_score>11.5 then 'C'
+when t.total_score>11 then 'C'
 when t.total_score>5 then 'D'
 else 'E' end as rank
 from(
 select restaurant_id, restaurant_name, city_name, 
-round(pinpai_score_normal,2), round(work_day_score_normal,2), round(back_user_score1_normal,2), round(price_score_normal,2),
-round(collection_score_normal,2), round(negative_restaurant_withdraw_score_normal,2), round(negative_user_withdraw_score_normal,2),
-round(negative_complaint_score_normal,2), round(negative_bad_rate_score_normal,2), round(negative_reminder_score_normal,2),
+round(pinpai_score_normal,2) as pinpai_score, round(work_day_score_normal,2) as work_day_score, 
+round(back_user_score1_normal,2) as back_user_score, 
+round(price_score_normal,2) as price_score, 
+round(collection_score_normal,2) as collection_score, 
+round(negative_restaurant_withdraw_score_normal,2) as negative_restaurant_withdraw_score, 
+round(negative_user_withdraw_score_normal,2) as negative_user_withdraw_score,
+round(negative_complaint_score_normal,2) as negative_complaint_score, 
+round(negative_bad_rate_score_normal,2) as negative_bad_rate_score,
+round(negative_reminder_score_normal,2) as negative_reminder_score,
 round(pinpai_score_normal + work_day_score_normal + user_score_normal + back_user_score1_normal + price_score_normal + collection_score_normal
 - negative_restaurant_withdraw_score_normal - negative_user_withdraw_score_normal - negative_complaint_score_normal 
 - negative_bad_rate_score_normal - negative_reminder_score_normal,2) as total_score
 from temp.temp_restaurant_score_for_zf_normalize
 ) t;
-select rank, count(*) from temp_restaurant_total_score_for_zf group by rank;
 
+select rank, count(*) from temp_restaurant_total_score_for_zf group by rank;
 select back_user_score from temp.temp_restaurant_score_for_zf limit 100;
 select floor(collection_score), count(*) from test.temp_restaurant_score_for_zf group by floor(collection_score);
-
-
-
-
